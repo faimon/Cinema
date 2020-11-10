@@ -9,9 +9,10 @@
 
 Главная страница показывает свободные места в зале, данные о занятых местах периодически обновляются:
 
+![GitHub Logo](https://github.com/faimon/cinema/blob/master/screenshots/index.png?raw=true)
 
 После выбора места в зале, пользователь перенаправляется на страницу с оплатой:
 
-
+![GitHub Logo](https://github.com/faimon/cinema/blob/master/screenshots/payment.png?raw=true)
 
  
