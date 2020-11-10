@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+</head>
+<body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function () {
+        setInterval(function () {
+            window.location.reload(true);
+        }, 5000);
+    });
+
+    $(document).ready(function () {
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:8080/cinema/hall',
+            dataType: 'json'
+        }).done(function (data) {
+            data.forEach(element => {
+                $(`label[for="${element.place}"]`).html(' Место занято ')
+                $(`input[id="${element.place}"]`).prop('disabled', true);
+            })
+        }).fail(function (err) {
+            alert("error: " + err);
+        });
+    })
+
+    function redirect() {
+        if (validate()) {
+            let value = $('input[name="place"]:checked').val();
+            window.location.href = "http://localhost:8080/cinema/payment?place=" + value;
+        }
+    }
+
+    function validate() {
+        if (!($('input[name="place"]').is(':checked'))) {
+            alert('Выберите место')
+            return false;
+        }
+        return true
+    }
+</script>
+<div class="container">
+    <div class="row pt-3">
+        <h4>
+            Бронирование месте на сеанс
+        </h4>
+        <table class="table table-bordered" id="hall">
+            <thead>
+            <tr>
+                <th style="width: 120px;">Ряд / Место</th>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>1</th>
+                <td><input type="radio" name="place" value="11" id="11"><label for="11"> Ряд 1, Место 1</label></td>
+                <td><input type="radio" name="place" value="12" id="12"><label for="12"> Ряд 1, Место 2</label></td>
+                <td><input type="radio" name="place" value="13" id="13"><label for="13"> Ряд 1, Место 3</label></td>
+            </tr>
+            <tr>
+                <th>2</th>
+                <td><input type="radio" name="place" value="21" id="21"><label for="21"> Ряд 2, Место 1</label></td>
+                <td><input type="radio" name="place" value="22" id="22"><label for="22"> Ряд 2, Место 2</label></td>
+                <td><input type="radio" name="place" value="23" id="23"><label for="23"> Ряд 2, Место 3</label></td>
+            </tr>
+            <tr>
+                <th>3</th>
+                <td><input type="radio" name="place" value="31" id="31"><label for="31"> Ряд 3, Место 1</label></td>
+                <td><input type="radio" name="place" value="32" id="32"><label for="32"> Ряд 3, Место 2</label></td>
+                <td><input type="radio" name="place" value="33" id="33"><label for="33"> Ряд 3, Место 3</label></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row float-right">
+        <button type="button" class="btn btn-success" onclick="return redirect()">Оплатить</button>
+    </div>
+</div>
+</body>
+</html>
