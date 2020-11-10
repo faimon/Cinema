@@ -18,6 +18,6 @@
 После оплаты, пользователь перенаправлятся на главную страницу, где место которое он оплатил,
 теперь занято:
 
-
+![GitHub Logo](https://github.com/faimon/cinema/blob/master/screenshots/Main.png?raw=true)
 
  
