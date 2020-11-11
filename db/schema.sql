@@ -1,7 +1,7 @@
 CREATE TABLE places
 (
     id    serial primary key,
-    place int not null
+    place int not null UNIQUE
 );
 
 CREATE TABLE accounts
